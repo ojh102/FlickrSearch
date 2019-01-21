@@ -3,22 +3,24 @@ package com.github.ojh102.flickrsearch.ui.search.photo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import com.github.ojh102.flickrsearch.R
+import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhoto
 import com.github.ojh102.flickrsearch.databinding.ViewPhotoBinding
 
 
-internal class PhotoAdapter : ListAdapter<PhotoItem, PhotoViewHolder>(object: DiffUtil.ItemCallback<PhotoItem>() {
-    override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
-        return oldItem.url == newItem.url
-    }
+internal class PhotoAdapter :
+    PagedListAdapter<FlickrPhoto, PhotoViewHolder>(object : DiffUtil.ItemCallback<FlickrPhoto>() {
+        override fun areItemsTheSame(oldItem: FlickrPhoto, newItem: FlickrPhoto): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
-        return oldItem.url == newItem.url
-    }
+        override fun areContentsTheSame(oldItem: FlickrPhoto, newItem: FlickrPhoto): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-}) {
+    }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -29,7 +31,14 @@ internal class PhotoAdapter : ListAdapter<PhotoItem, PhotoViewHolder>(object: Di
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let {
+            holder.bind(
+                PhotoItem(
+                    title = it.title,
+                    url = it.url
+                )
+            )
+        }
     }
 
 }

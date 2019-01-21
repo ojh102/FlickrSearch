@@ -1,11 +1,11 @@
 package com.github.ojh102.flickrsearch.utils
 
-import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhotoResponse
+import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhoto
 
 internal class FlickrUrlParser {
     companion object {
-        fun parse(flickrPhotoResponse: FlickrPhotoResponse): String {
-            return "https://farm${flickrPhotoResponse.farm}.staticflickr.com/${flickrPhotoResponse.server}/${flickrPhotoResponse.id}_${flickrPhotoResponse.secret}.jpg"
+        fun parse(flickrPhoto: FlickrPhoto): String {
+            return "https://farm${flickrPhoto.farm}.staticflickr.com/${flickrPhoto.server}/${flickrPhoto.id}_${flickrPhoto.secret}.jpg"
         }
     }
 }

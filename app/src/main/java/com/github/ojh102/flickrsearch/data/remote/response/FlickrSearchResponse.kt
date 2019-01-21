@@ -10,10 +10,10 @@ internal data class FlickrSearchResponse(
 internal data class FlickrPhotosResponse(
     val page: Int,
     val perpage: Int,
-    val photo: List<FlickrPhotoResponse> = mutableListOf()
+    val photo: List<FlickrPhoto> = mutableListOf()
 )
 
-internal data class FlickrPhotoResponse(
+internal data class FlickrPhoto(
     val id: String,
     val owner: String,
     val secret: String,
