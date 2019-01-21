@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">FlickrSearch</string>
 
-    <string name="flickr_url_parse_format">https://farm%1$d.staticflickr.com/%2$s/%3$4_%4$5.jpg</string>
+    <string-array name="keywords">
+        <item>Apple</item>
+        <item>Banana</item>
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Egg</item>
+        <item>Fire</item>
+        <item>Go</item>
+        <item>Home</item>
+        <item>Italy</item>
+        <item>Joker</item>
+    </string-array>
+
 </resources>

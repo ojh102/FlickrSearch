@@ -1,4 +1,4 @@
-package com.plug.android.utils.rx
+package com.github.ojh102.flickrsearch.utils.rx
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers

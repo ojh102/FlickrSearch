@@ -4,11 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import androidx.lifecycle.ViewModelProvider
-import com.github.ojh102.flickrsearch.AppChannel
-import com.github.ojh102.flickrsearch.AppChannelImpl
 import com.github.ojh102.flickrsearch.base.ViewModelProviderFactory
-import com.plug.android.utils.rx.AppSchedulerProvider
-import com.plug.android.utils.rx.SchedulerProvider
+import com.github.ojh102.flickrsearch.utils.rx.AppSchedulerProvider
+import com.github.ojh102.flickrsearch.utils.rx.SchedulerProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -32,10 +30,6 @@ internal interface ApplicationModule {
     @Binds
     @Singleton
     fun bindSchedulerProvider(appSchedulerProvider: AppSchedulerProvider): SchedulerProvider
-
-    @Binds
-    @Singleton
-    fun bindAppChannel(appChannelImpl: AppChannelImpl): AppChannel
 
     @Binds
     fun bindViewModelFactory(providerFactory: ViewModelProviderFactory): ViewModelProvider.Factory

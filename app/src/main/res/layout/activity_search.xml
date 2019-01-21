@@ -23,13 +23,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{viewModel.selectedKeyword}"
+            app:title="@{viewModel.selectedKeyword.keyword}"
             tools:title="Apple"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"/>

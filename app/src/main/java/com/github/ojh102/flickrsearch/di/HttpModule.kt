@@ -4,7 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.github.ojh102.flickrsearch.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.plug.android.di.qualifier.HttpLogging
+import com.github.ojh102.flickrsearch.di.qualifier.HttpLogging
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

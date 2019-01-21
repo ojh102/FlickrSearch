@@ -2,7 +2,7 @@ package com.github.ojh102.flickrsearch.data.remote
 
 import com.github.ojh102.flickrsearch.data.remote.api.FlickrApi
 import com.github.ojh102.flickrsearch.data.remote.response.FlickrSearchResponse
-import com.plug.android.utils.rx.SchedulerProvider
+import com.github.ojh102.flickrsearch.utils.rx.SchedulerProvider
 import io.reactivex.Single
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.github.ojh102.flickrsearch.BR
-import com.plug.android.utils.rx.SchedulerProvider
+import com.github.ojh102.flickrsearch.utils.rx.SchedulerProvider
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

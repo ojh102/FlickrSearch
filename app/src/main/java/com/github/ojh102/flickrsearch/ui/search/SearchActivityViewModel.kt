@@ -1,16 +1,52 @@
 package com.github.ojh102.flickrsearch.ui.search
 
-import androidx.lifecycle.LiveData
+import android.content.res.Resources
+import androidx.lifecycle.MutableLiveData
+import com.github.ojh102.flickrsearch.R
 import com.github.ojh102.flickrsearch.base.BaseViewModel
-import com.github.ojh102.flickrsearch.utils.extension.toLiveData
-import com.jakewharton.rxrelay2.BehaviorRelay
+import com.github.ojh102.flickrsearch.repository.RemoteRepository
+import com.github.ojh102.flickrsearch.ui.search.keyword.KeywordItem
+import com.github.ojh102.flickrsearch.ui.search.photo.PhotoItem
+import com.github.ojh102.flickrsearch.utils.extension.subscribeOf
+import com.jakewharton.rxrelay2.PublishRelay
+import io.reactivex.Observable
+import io.reactivex.rxkotlin.ofType
 import javax.inject.Inject
 
-internal class SearchActivityViewModel @Inject constructor(): BaseViewModel() {
+internal class SearchActivityViewModel @Inject constructor(
+        private val resources: Resources,
+        private val remoteRepository: RemoteRepository
 
-    private val selectedKeywordRelay = BehaviorRelay.createDefault("apple")
+) : BaseViewModel() {
 
-    val selectedKeyword: LiveData<String> = selectedKeywordRelay.toLiveData()
+    val keywordList: MutableLiveData<List<KeywordItem>> = MutableLiveData()
+    val selectedKeyword: MutableLiveData<KeywordItem> = MutableLiveData()
+    val photoList: MutableLiveData<List<PhotoItem>> = MutableLiveData()
 
+    private val actionRelay = PublishRelay.create<SearchAction>()
+
+    init {
+        disposables.addAll(
+                ofAction()
+                        .ofType<SearchAction.Select.Keyword>()
+                        .doOnNext { selectedKeyword.postValue(it.keywordItem) }
+                        .switchMapSingle { remoteRepository.search(it.keywordItem.keyword, 1) }
+                        .map {
+                            it.photos.photo.map { photo ->
+                                PhotoItem(title = photo.title, url = photo.url)
+                            }
+                        }
+                        .subscribeOf(onNext = { photoList.postValue(it) })
+        )
+
+        val keywords = resources.getStringArray(R.array.keywords).map { KeywordItem(it) }
+
+        keywordList.postValue(keywords)
+
+        toAction(SearchAction.Select.Keyword(keywords.first()))
+    }
+
+    fun toAction(action: SearchAction) = actionRelay.accept(action)
+    fun ofAction(): Observable<SearchAction> = actionRelay
 
 }
