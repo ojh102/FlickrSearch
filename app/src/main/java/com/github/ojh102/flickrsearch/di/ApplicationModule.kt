@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.lifecycle.ViewModelProvider
 import com.github.ojh102.flickrsearch.base.ViewModelProviderFactory
+import com.github.ojh102.flickrsearch.utils.ResourcesProvider
+import com.github.ojh102.flickrsearch.utils.ResourcesProviderImpl
 import com.github.ojh102.flickrsearch.utils.rx.AppSchedulerProvider
 import com.github.ojh102.flickrsearch.utils.rx.SchedulerProvider
 import dagger.Binds
@@ -33,6 +35,10 @@ internal interface ApplicationModule {
     @Binds
     @Singleton
     fun bindContext(application: Application): Context
+
+    @Binds
+    @Singleton
+    fun provideResoucreProvier(resourcesProviderImpl: ResourcesProviderImpl): ResourcesProvider
 
     @Binds
     @Singleton
