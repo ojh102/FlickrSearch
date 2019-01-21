@@ -1,0 +1,33 @@
+ext {
+    def buildNumber = Integer.parseInt(System.getenv("BITRISE_BUILD_NUMBER") ?: "0")
+
+    buildVersionCode = {
+        def (major, minor, patch) = flickerSearchVersion.tokenize('.').collect {
+            it.toInteger()
+        }
+
+        def screenVersion = supportedScreenSize.toInteger()
+
+        def versionCode = (min_sdk_version * 10000000) + (screenVersion * 100000) + (major * 10000) + (minor * 100) + (patch * 1)
+
+        println("versionCode = ${versionCode}")
+
+        versionCode
+    }
+
+    buildVersionName = {
+        def versionName = "${flickerSearchVersion}"
+
+        println("versionName = ${versionName}")
+
+        versionName
+    }
+
+    getApkName = { buildType ->
+        def apkName = "flicker_search-${buildVersionName()}.${buildNumber}-${buildType}.apk"
+
+        println("apkName = ${apkName}")
+
+        apkName
+    }
+}

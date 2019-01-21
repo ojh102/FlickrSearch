@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply from: '../versioning.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.compile_sdk_version
+
+    defaultConfig {
+        applicationId "com.github.ojh102.flickersearch"
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.target_sdk_version
+        versionCode buildVersionCode()
+        versionName buildVersionName()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+
+            debuggable true
+            zipAlignEnabled false
+            minifyEnabled false
+            multiDexEnabled true
+        }
+
+        qa {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".qa"
+
+            debuggable true
+            zipAlignEnabled true
+            minifyEnabled true
+            multiDexEnabled false
+            shrinkResources true
+            crunchPngs true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles file('../proguard').listFiles()
+            println(proguardFiles)
+        }
+
+        release {
+            signingConfig null
+
+            debuggable false
+            zipAlignEnabled true
+            minifyEnabled true
+            multiDexEnabled false
+            shrinkResources true
+            crunchPngs true
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles file('../proguard').listFiles()
+            println(proguardFiles)
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = getApkName(variant.buildType.name)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
+
+    // Jetpack
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat_version"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerview_version"
+    implementation "androidx.annotation:annotation:$rootProject.annotation_version"
+    implementation "com.google.android.material:material:$rootProject.material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$rootProject.lifecycle_version"
+    implementation "androidx.paging:paging-runtime:$rootProject.paging_version"
+    implementation "androidx.room:room-runtime:$rootProject.room_version"
+    implementation "androidx.room:room-rxjava2:$rootProject.room_version"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
+    kapt "androidx.room:room-compiler:$rootProject.room_version"
+    kapt "androidx.databinding:databinding-compiler:$rootProject.android_gradle_version"
+
+    // DI
+    implementation "com.google.dagger:dagger:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger_version"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
+
+    // Network
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    
+    // Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rx_kotlin_version"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$rootProject.rx_relay_version"
+
+    // Image
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "jp.wasabeef:glide-transformations:$rootProject.glide_transformations_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
+    // Debug
+    implementation "com.jakewharton.timber:timber:$rootProject.timber_version"
+    implementation "com.facebook.stetho:stetho:$rootProject.stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stetho_version"
+
+    // Test
+    testImplementation "junit:junit:$rootProject.junit_version"
+    androidTestImplementation "junit:junit:$rootProject.junit_version"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.room_version"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext_junit_version}"
+    androidTestImplementation "androidx.test:rules:$rootProject.rules_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.arch_core_testing_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+}
