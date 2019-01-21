@@ -9,7 +9,7 @@ android {
     compileSdkVersion rootProject.ext.compile_sdk_version
 
     defaultConfig {
-        applicationId "com.github.ojh102.flickersearch"
+        applicationId "com.github.ojh102.flickrsearch"
         minSdkVersion rootProject.ext.min_sdk_version
         targetSdkVersion rootProject.ext.target_sdk_version
         versionCode buildVersionCode()
@@ -41,7 +41,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/\"")
 
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
@@ -53,7 +53,7 @@ android {
         }
 
         qa {
-            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/\"")
 
             signingConfig signingConfigs.debug
             applicationIdSuffix ".qa"
@@ -71,7 +71,7 @@ android {
         }
 
         release {
-            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/\"")
 
             signingConfig null
 

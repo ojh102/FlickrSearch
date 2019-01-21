@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">FlickerSearch</string>
+    <string name="app_name">FlickrSearch</string>
+
+    <string name="flickr_url_parse_format">https://farm%1$d.staticflickr.com/%2$s/%3$4_%4$5.jpg</string>
 </resources>

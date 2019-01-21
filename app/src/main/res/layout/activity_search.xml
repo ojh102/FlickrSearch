@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.ojh102.flickersearch.ui.search.SearchActivityViewModel"/>
+            type="com.github.ojh102.flickrsearch.ui.search.SearchActivityViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
