@@ -10,6 +10,7 @@ import com.github.ojh102.flickrsearch.utils.rx.SchedulerProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Module(includes = [ApplicationModule.ProvideModule::class])
@@ -20,6 +21,12 @@ internal interface ApplicationModule {
         @Singleton
         fun provideResources(context: Context): Resources {
             return context.resources
+        }
+
+        @Provides
+        @Singleton
+        fun provideCompositeDisposable(): CompositeDisposable {
+            return CompositeDisposable()
         }
     }
 

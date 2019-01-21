@@ -1,6 +1,6 @@
 package com.github.ojh102.flickrsearch
 
-import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhotoResponse
+import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhoto
 import com.github.ojh102.flickrsearch.utils.FlickrUrlParser
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -8,11 +8,11 @@ import org.junit.Test
 
 internal class FlickrParseTest {
 
-    lateinit var flickrPhotoResponse: FlickrPhotoResponse
+    lateinit var flickrPhoto: FlickrPhoto
 
     @Before
     fun setup() {
-        flickrPhotoResponse = FlickrPhotoResponse(
+        flickrPhoto = FlickrPhoto(
                 id = "id",
                 owner = "owner",
                 secret = "secret",
@@ -24,6 +24,6 @@ internal class FlickrParseTest {
 
     @Test
     fun parse_isCorrect() {
-        assertEquals("https://farm0.staticflickr.com/server/id_secret.jpg", FlickrUrlParser.parse(flickrPhotoResponse))
+        assertEquals("https://farm0.staticflickr.com/server/id_secret.jpg", FlickrUrlParser.parse(flickrPhoto))
     }
 }
