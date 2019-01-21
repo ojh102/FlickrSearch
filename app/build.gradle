@@ -41,6 +41,8 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
 
@@ -51,6 +53,8 @@ android {
         }
 
         qa {
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+
             signingConfig signingConfigs.debug
             applicationIdSuffix ".qa"
 
@@ -67,6 +71,8 @@ android {
         }
 
         release {
+            buildConfigField("String", "BASE_URL", "\"https://api.flickr.com/services/rest/\"")
+
             signingConfig null
 
             debuggable false
@@ -124,7 +130,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
-    
+
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rx_java_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android_version"
