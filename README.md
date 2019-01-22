@@ -81,7 +81,7 @@ Activity의 layout에 해당하는 xml에는 항상 Activity의 viewModel을 var
 
 **viewModel**의 **LiveData**를 통해 값을 binding하는 것을 기본으로 한다. 
 
-다만, acitivty를 벗어나는 ViewHolder나 CustomView의 경우에는 일반적인 데이터바인딩 방식을 사용한다.
+다만, Acitivty를 벗어나는 ViewHolder나 CustomView의 경우에는 일반적인 데이터바인딩 방식을 사용한다.
 
 
 
@@ -200,7 +200,7 @@ internal class YourActivityViewModel @Inject constructor() : BaseViewModel() {
 
 **LiveData의 초기화** 및 **Action상태에 따른 State의 변화** 같은 부분은 모두 **init**에서 처리한다.
 
-각 Action과 State를 **ofType()**을 통해 transform하여 사용한다.
+각 Action과 State를 **ofType**을 통해 transform하여 사용한다.
 
 ```kotlin
 init {
