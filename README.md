@@ -8,7 +8,7 @@ Flickr을 이용한 검색 앱
 
 ## Concept
 
-![concept](/art/concept)
+![concept](/art/concept.png)
 
 
 
