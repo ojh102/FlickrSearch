@@ -46,7 +46,7 @@ internal class SearchActivity : BaseActivity<ActivitySearchBinding, SearchActivi
 
         keywordAdapter.setCallbacks(object : KeywordAdapter.Callbacks {
             override fun onClickKeyword(item: KeywordItem) {
-                viewModel.toAction(SearchAction.Select.Keyword(item))
+                viewModel.toAction(SearchAction.Click.Keyword(item))
             }
         })
     }
