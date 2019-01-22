@@ -17,7 +17,9 @@ internal class SearchDataSourceFactory(
 
     override fun create(): DataSource<Int, FlickrPhoto> {
         val dataSource = SearchDataSource(keyword ,remoteService, disposables)
+
         mutableDataSource.postValue(dataSource)
+
         return dataSource
     }
 

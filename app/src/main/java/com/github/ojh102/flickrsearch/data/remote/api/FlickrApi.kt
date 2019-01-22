@@ -11,6 +11,7 @@ internal interface FlickrApi {
         @Query("tags") keyword: String,
         @Query("page") page: Int,
 
+        @Query("title") title: String = keyword,
         @Query("per_page") perPage: Int = 20,
         @Query("method") method: String = "flickr.photos.search",
         @Query("api_key") apiKey: String = "2f904f1669187c7860cae324d891ccd3",

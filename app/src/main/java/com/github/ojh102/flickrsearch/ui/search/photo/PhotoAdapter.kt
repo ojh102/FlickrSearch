@@ -10,8 +10,7 @@ import com.github.ojh102.flickrsearch.data.remote.response.FlickrPhoto
 import com.github.ojh102.flickrsearch.databinding.ViewPhotoBinding
 
 
-internal class PhotoAdapter :
-    PagedListAdapter<FlickrPhoto, PhotoViewHolder>(object : DiffUtil.ItemCallback<FlickrPhoto>() {
+internal class PhotoAdapter : PagedListAdapter<FlickrPhoto, PhotoViewHolder>(object : DiffUtil.ItemCallback<FlickrPhoto>() {
         override fun areItemsTheSame(oldItem: FlickrPhoto, newItem: FlickrPhoto): Boolean {
             return oldItem.id == newItem.id
         }

@@ -17,10 +17,6 @@ internal class RemoteRepositoryImpl @Inject constructor(
 
 ) : RemoteRepository {
 
-    override fun search(keyword: String, page: Int): Single<FlickrSearchResponse> {
-        return remoteService.search(keyword, page)
-    }
-
     override fun search(keyword: String): Observable<PagedList<FlickrPhoto>> {
         val dataSourceFactory = SearchDataSourceFactory(keyword, remoteService, disposable)
 
